@@ -1,0 +1,20 @@
+{
+  "name": "ngraph.redis",
+  "version": "0.1.0",
+  "description": "Experimental: Redis as a graph storage",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "redis",
+    "ngraph",
+    "storage"
+  ],
+  "author": "Andrei Kashcha",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/anvaka/ngraph.redis"
+  }
+}
