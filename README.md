@@ -24,8 +24,8 @@ We use node identifiers (`NODE_ID`) to refer to a node. Each identifier of a nod
 consist of two parts:
 
 `NODE_TYPE:ID` - here `NODE_TYPE:` is optional prefix, which describes type of the
-node (`PERSON`, `REPOSITORY`, etc.). `id` is a unique number within a set. Example:
-`PERSON:anvaka`, `REPOSITORY:anvaka/ngraph`.
+node (`PERSON`, `REPOSITORY`, etc.). `id` is a unique identifier within a set. Example:
+`PERSON:anvaka`, `REPOSITORY:google/cayley`.
 
 There are several data structures with predefined names:
 
