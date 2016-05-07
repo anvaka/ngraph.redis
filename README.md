@@ -2,6 +2,11 @@
 
 This is all only theory. There is no implementation yet. Your feedback is welcome.
 
+# Update
+
+I think I'm going to pivot from requirements below. Will focus on memory footprint
+first, even if it will lead to giving up on `TYPE` idea.
+
 ## Requirements
 
 Evaluate redis as a storage for large directed graphs.
@@ -57,6 +62,7 @@ PERSON:anvaka:data -> {
 
 * How to iterate all edges? Looks like this could be a problem, since one need
 to know `EDGE_TYPE` before starting iteration
+
 
 # license
 
