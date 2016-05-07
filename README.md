@@ -53,6 +53,11 @@ PERSON:anvaka:data -> {
 ...
 ```
 
+## Open question
+
+* How to iterate all edges? Looks like this could be a problem, since one need
+to know `EDGE_TYPE` before starting iteration
+
 # license
 
 MIT
