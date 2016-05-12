@@ -3,11 +3,15 @@ var loadScripts = require('./lib/loadScripts.js');
 var createScriptRunner = require('./lib/scriptRunner.js');
 var createPendingRunner = require('./lib/pendingRunner.js');
 var bluebird = require('bluebird');
+var redis = require('redis');
+promisify(redis);
 
 module.exports = createGraph;
 module.exports.promisify = promisify;
 
-function createGraph(client) {
+function createGraph(redisOptions) {
+  var client = redis.createClient(redisOptions);
+
   var scriptRunner = createPendingRunner();
 
   var api = {
@@ -17,7 +21,9 @@ function createGraph(client) {
     forEachLink: forEachLink,
     forEachNode: forEachNode,
     getNode: getNode,
-    getLink: getLink
+    getLink: getLink,
+
+    getRedisClient: getRedisClient
   };
 
   eventify(api);
@@ -25,6 +31,10 @@ function createGraph(client) {
   loadScripts(client, setScriptRunner);
 
   return api;
+
+  function getRedisClient() {
+    return client;
+  }
 
   function addNode(nodeId, data) {
     return scriptRunner.addNode(nodeId, data);
@@ -38,8 +48,8 @@ function createGraph(client) {
     
   }
 
-  function getNode() {
-    
+  function getNode(nodeId) {
+    return scriptRunner.getNode(nodeId);
   }
 
   function getLink() {
