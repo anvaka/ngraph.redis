@@ -6,9 +6,11 @@
 
 local function getOrAddNode(nodeId)
   -- TODO: How to avoid code duplication?
-  local _id = redis.call('INCR', '_unique_counter')
+  local _id = redis.call('HGET', '_userIdToRedisId', nodeId)
 
   if not _id then
+    _id = redis.call('INCR', '_nextNodeId')
+
     redis.call('HSET', '_userIdToRedisId', nodeId, _id)
     redis.call('SADD', '_nodes', _id)
   end
@@ -16,7 +18,6 @@ local function getOrAddNode(nodeId)
   return _id
 end
 
-print "booo"
 local _fromId = getOrAddNode(KEYS[1]);
 local _toId = getOrAddNode(KEYS[2]);
 
