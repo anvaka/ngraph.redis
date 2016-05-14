@@ -10,7 +10,7 @@ local function getOrAddNode(nodeId)
     _id = redis.call('INCR', '_nextNodeId')
 
     redis.call('HSET', '_userIdToRedisId', nodeId, _id)
-    redis.call('SADD', '_nodes', _id)
+    redis.call('HSET', '_redisIdToUserId', _id, nodeId)
   end
 
   return _id

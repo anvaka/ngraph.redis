@@ -20,6 +20,7 @@ function createGraph(redisOptions) {
 
     forEachLink: forEachLink,
     forEachNode: forEachNode,
+    forEachLinkedNode: forEachLinkedNode,
     getNode: getNode,
     getLink: getLink,
 
@@ -46,6 +47,10 @@ function createGraph(redisOptions) {
 
   function forEachLink() {
     
+  }
+
+  function forEachLinkedNode(nodeId, cb, kind) {
+    return scriptRunner.forEachLinkedNode(nodeId, cb, kind);
   }
 
   function getNode(nodeId) {
