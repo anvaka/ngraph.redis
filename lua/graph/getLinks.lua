@@ -1,7 +1,13 @@
-local function getLinks(id, kind)
-  -- todo: it's probably better to use SSCAN, so that we do not block redis
+local function getLinks(id, kind, cursor)
   local keyname = id .. '.' .. kind
-  local redisIds = redis.call("SMEMBERS", keyname)
+  if not cursor then
+    cursor = 0
+  end
+
+  local sscanResult = redis.call('SSCAN', keyname, cursor, 'COUNT', 500)
+
+  local nextCursor = sscanResult[1]
+  local redisIds = sscanResult[2]
 
   if table.getn(redisIds) == 0 then
     return {}
@@ -32,7 +38,7 @@ local function getLinks(id, kind)
     table.insert(result, link)
   end)
 
-  return result
+  return result, nextCursor
 end
 
 return getLinks

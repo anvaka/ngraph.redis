@@ -14,12 +14,12 @@ if not _id then
 end
 
 if ARGV[1] == 'in' then
-  result['in'] = getLinks(_id, 'in')
+  result['in'], result['in.cursor'] = getLinks(_id, 'in', ARGV[2])
 elseif ARGV[1] == 'out' then
-  result.out = getLinks(_id, 'out')
+  result.out, result['out.cursor'] = getLinks(_id, 'out', ARGV[2])
 else
-  result['in'] = getLinks(_id, 'in')
-  result.out = getLinks(_id, 'out')
+  result['in'], result['in.cursor'] = getLinks(_id, 'in', ARGV[2])
+  result.out, result['out.cursor'] = getLinks(_id, 'out', ARGV[2])
 end
 
 return cjson.encode(result)
